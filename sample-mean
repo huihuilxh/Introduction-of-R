@@ -1,0 +1,30 @@
+aat=function(aa)
+{
+bb=aa%*%t(aa)
+return(bb)
+}
+
+
+sample.mean=function(design.matrix)
+### input ###
+### design.matrix = sample design matrix, XX=n*p matrix , where nn = sample size, pp = variable dimensional
+### output ###
+### sam.mean = sample mean pp-vector bar(X) 
+### sam.var  = sample variance pp*pp matrix  S=sum{i=1 to n} (Xi-bar(X))(Xi-bar(X))'/(n-1)
+{
+nn=nrow(design.matrix)     ## sample size
+pp=ncol(design.matrix)     ## dimensinal
+
+barX=apply(design.matrix, 2, mean)
+CenX=t(t(design.matrix)-barX)
+
+Work=matrix(0, nrow=nn, ncol=pp*pp)
+for (i in 1:nn)
+{
+Work[i,]=as.vector(aat(CenX[i,]))
+}
+SS.vector=apply(Work, 2, sum)/(nn-1)
+SS=matrix(SS.vector, nrow=pp, ncol=pp)
+
+return(list(sam.mean=barX, sam.var=SS))
+}
