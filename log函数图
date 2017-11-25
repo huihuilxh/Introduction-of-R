@@ -1,0 +1,18 @@
+ x=seq(0,10,by=0.01)
+y=log(x)
+plot(x,y, type="l")
+lines(x,y) 
+
+x=runif(300,min=0,max=100);
+x
+min(x)
+
+y=runif(50);
+y
+z=runif(50);
+z
+y+z
+y-z
+y*z
+y/z
+
